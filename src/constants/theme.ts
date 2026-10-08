@@ -1,11 +1,5 @@
-/**
- * App design tokens — Financials Ready dashboard (Figma handoff).
- */
-
 import '@/global.css';
-
 import { Platform } from 'react-native';
-
 import { AppColors } from '@/presentation/theme/colors';
 
 export const Colors = {
