@@ -64,6 +64,12 @@ export default function RootLayout() {
               animation: 'slide_from_bottom',
             }}
           />
+          <Stack.Screen
+            name="transaction-details"
+            options={{
+              animation: 'slide_from_right',
+            }}
+          />
         </Stack>
         {showSplash ? <SplashSequence onFinish={handleSplashFinish} /> : null}
       </View>
