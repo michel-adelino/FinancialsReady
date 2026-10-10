@@ -8,10 +8,12 @@ import {
 import { DefaultTheme, ThemeProvider } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
 import * as SplashScreen from 'expo-splash-screen';
-import { useEffect } from 'react';
+import { useCallback, useEffect, useState } from 'react';
+import { StyleSheet, View } from 'react-native';
 
 import AppTabs from '@/components/app-tabs';
 import { AppColors } from '@/constants/theme';
+import { SplashSequence } from '@/presentation/components/splash/splash-sequence';
 
 SplashScreen.preventAutoHideAsync();
 
@@ -35,12 +37,16 @@ export default function TabLayout() {
     Inter_600SemiBold,
     Inter_700Bold,
   });
+  const [showSplash, setShowSplash] = useState(true);
 
   useEffect(() => {
-    if (fontsLoaded || fontError) {
-      SplashScreen.hideAsync();
-    }
+    if (!(fontsLoaded || fontError)) return;
+    SplashScreen.hideAsync();
   }, [fontsLoaded, fontError]);
+
+  const handleSplashFinish = useCallback(() => {
+    setShowSplash(false);
+  }, []);
 
   if (!fontsLoaded && !fontError) {
     return null;
@@ -48,8 +54,17 @@ export default function TabLayout() {
 
   return (
     <ThemeProvider value={AppTheme}>
-      <StatusBar style="dark" />
-      <AppTabs />
+      <StatusBar style={showSplash ? 'light' : 'dark'} />
+      <View style={styles.root}>
+        <AppTabs />
+        {showSplash ? <SplashSequence onFinish={handleSplashFinish} /> : null}
+      </View>
     </ThemeProvider>
   );
 }
+
+const styles = StyleSheet.create({
+  root: {
+    flex: 1,
+  },
+});

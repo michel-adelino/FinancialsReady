@@ -21,4 +21,8 @@ export const AppColors = {
   balanceIconBg: 'rgba(255, 255, 255, 0.09)',
   balanceDivider: 'rgba(255, 255, 255, 0.13)',
   balanceBorder: 'rgba(255, 255, 255, 0.14)',
+  splashBg: '#19342D',
+  splashForeground: '#F3F7F1',
+  splashMuted: '#B0C6BC',
+  splashAccent: '#98D9BA',
 } as const;
