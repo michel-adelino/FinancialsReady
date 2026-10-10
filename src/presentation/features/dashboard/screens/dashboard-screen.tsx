@@ -63,6 +63,7 @@ export function DashboardScreen() {
           <TransactionList
             transactions={vm.transactions}
             onViewAll={vm.onViewAllTransactions}
+            onTransactionPress={vm.onTransactionPress}
           />
         </ScrollView>
       )}

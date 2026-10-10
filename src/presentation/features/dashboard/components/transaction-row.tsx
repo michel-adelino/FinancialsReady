@@ -1,6 +1,6 @@
 import { BriefcaseBusiness, Coffee, ShoppingBag, Store } from 'lucide-react-native';
 import type { ComponentType } from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { Pressable, StyleSheet, Text, View } from 'react-native';
 
 import { AppColors, Radius , FontFamily } from '@/core/theme';
 import type { TransactionIconKey } from '@/domain/entities/transaction';
@@ -17,15 +17,20 @@ const ICON_MAP: Record<TransactionIconKey, LucideIcon> = {
 
 type TransactionRowProps = {
   transaction: TransactionRowUi;
+  onPress?: (id: string) => void;
 };
 
-export function TransactionRow({ transaction }: TransactionRowProps) {
+export function TransactionRow({ transaction, onPress }: TransactionRowProps) {
   const Icon = ICON_MAP[transaction.iconKey] ?? ShoppingBag;
   const iconBg =
     transaction.iconTone === 'accent' ? AppColors.budgetBadgeBg : AppColors.softSurface;
 
   return (
-    <View style={styles.row}>
+    <Pressable
+      accessibilityRole="button"
+      accessibilityLabel={`${transaction.merchant}, ${transaction.amountLabel}`}
+      onPress={() => onPress?.(transaction.id)}
+      style={({ pressed }) => [styles.row, pressed && styles.rowPressed]}>
       <View style={[styles.iconWrap, { backgroundColor: iconBg }]}>
         <Icon size={16} color={AppColors.accent} strokeWidth={1.8} />
       </View>
@@ -44,7 +49,7 @@ export function TransactionRow({ transaction }: TransactionRowProps) {
         ]}>
         {transaction.amountLabel}
       </Text>
-    </View>
+    </Pressable>
   );
 }
 
@@ -54,6 +59,9 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     gap: 10,
     height: 47,
+  },
+  rowPressed: {
+    opacity: 0.72,
   },
   iconWrap: {
     width: 34,

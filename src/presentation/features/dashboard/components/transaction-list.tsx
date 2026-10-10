@@ -8,9 +8,14 @@ import type { TransactionRowUi } from '@/presentation/features/dashboard/viewmod
 type TransactionListProps = {
   transactions: TransactionRowUi[];
   onViewAll: () => void;
+  onTransactionPress: (id: string) => void;
 };
 
-export function TransactionList({ transactions, onViewAll }: TransactionListProps) {
+export function TransactionList({
+  transactions,
+  onViewAll,
+  onTransactionPress,
+}: TransactionListProps) {
   return (
     <View style={styles.section}>
       <View style={styles.heading}>
@@ -26,7 +31,11 @@ export function TransactionList({ transactions, onViewAll }: TransactionListProp
 
       <View style={styles.list}>
         {transactions.map((tx) => (
-          <TransactionRow key={tx.id} transaction={tx} />
+          <TransactionRow
+            key={tx.id}
+            transaction={tx}
+            onPress={onTransactionPress}
+          />
         ))}
       </View>
     </View>

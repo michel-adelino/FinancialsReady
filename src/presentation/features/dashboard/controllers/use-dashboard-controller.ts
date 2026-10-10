@@ -29,6 +29,13 @@ export function useDashboardController() {
     Alert.alert('Transactions', 'Full transaction list coming soon.');
   }, []);
 
+  const onTransactionPress = useCallback(
+    (id: string) => {
+      router.push({ pathname: '/transaction-details', params: { id } });
+    },
+    [router]
+  );
+
   const onNotifications = useCallback(() => {
     Alert.alert('Notifications', 'No new notifications.');
   }, []);
@@ -40,6 +47,7 @@ export function useDashboardController() {
     onAddExpense,
     onAddIncome,
     onViewAllTransactions,
+    onTransactionPress,
     onNotifications,
   };
 }
