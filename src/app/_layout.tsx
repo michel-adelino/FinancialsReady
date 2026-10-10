@@ -12,7 +12,7 @@ import { useCallback, useEffect, useState } from 'react';
 import { StyleSheet, View } from 'react-native';
 
 import { AppColors } from '@/core/theme';
-import { SplashSequence } from '@/presentation/features/splash/components/splash-sequence';
+import { SplashSequence } from '@/features/splash/presentation/components/splash-sequence';
 
 SplashScreen.preventAutoHideAsync();
 

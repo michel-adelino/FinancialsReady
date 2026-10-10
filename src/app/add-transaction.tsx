@@ -1,4 +1,4 @@
-import { AddTransactionScreen } from '@/presentation/features/add-transaction/screens/add-transaction-screen';
+import { AddTransactionScreen } from '@/features/add-transaction/presentation/screens/add-transaction-screen';
 
 export default function AddTransactionRoute() {
   return <AddTransactionScreen />;
