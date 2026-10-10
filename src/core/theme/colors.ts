@@ -25,4 +25,11 @@ export const AppColors = {
   splashForeground: '#F3F7F1',
   splashMuted: '#B0C6BC',
   splashAccent: '#98D9BA',
+  chartCurrent: '#88AA9E',
+  categoryHousing: '#2F6F5E',
+  categoryDining: '#C86B58',
+  categoryTransport: '#C49A63',
+  categoryOther: '#5E7F8B',
+  tipBackground: '#F7E8E3',
+  tipBorder: '#EFCFC7',
 } as const;
