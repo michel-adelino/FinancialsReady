@@ -5,13 +5,12 @@ import {
   Inter_700Bold,
   useFonts,
 } from '@expo-google-fonts/inter';
-import { DefaultTheme, ThemeProvider } from 'expo-router';
+import { DefaultTheme, Stack, ThemeProvider } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
 import * as SplashScreen from 'expo-splash-screen';
 import { useCallback, useEffect, useState } from 'react';
 import { StyleSheet, View } from 'react-native';
 
-import AppTabs from '@/components/app-tabs';
 import { AppColors } from '@/constants/theme';
 import { SplashSequence } from '@/presentation/components/splash/splash-sequence';
 
@@ -30,7 +29,7 @@ const AppTheme = {
   },
 };
 
-export default function TabLayout() {
+export default function RootLayout() {
   const [fontsLoaded, fontError] = useFonts({
     Inter_400Regular,
     Inter_500Medium,
@@ -56,7 +55,16 @@ export default function TabLayout() {
     <ThemeProvider value={AppTheme}>
       <StatusBar style={showSplash ? 'light' : 'dark'} />
       <View style={styles.root}>
-        <AppTabs />
+        <Stack screenOptions={{ headerShown: false }}>
+          <Stack.Screen name="(tabs)" />
+          <Stack.Screen
+            name="add-transaction"
+            options={{
+              presentation: 'modal',
+              animation: 'slide_from_bottom',
+            }}
+          />
+        </Stack>
         {showSplash ? <SplashSequence onFinish={handleSplashFinish} /> : null}
       </View>
     </ThemeProvider>
