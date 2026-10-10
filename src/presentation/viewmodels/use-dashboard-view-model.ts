@@ -1,6 +1,8 @@
-import { useCallback, useMemo, useState } from 'react';
+import { useFocusEffect, useRouter } from 'expo-router';
+import { useCallback, useMemo, useState, useSyncExternalStore } from 'react';
 import { Alert } from 'react-native';
 
+import { financeStore } from '@/data/datasources/finance-store';
 import { getDashboardUseCase, getGreetingUseCase } from '@/data/di';
 import type { YearMonth } from '@/domain/entities/dashboard-snapshot';
 import type {
@@ -50,13 +52,28 @@ export type DashboardUiState = {
 const INITIAL_MONTH: YearMonth = { year: 2026, month: 9 };
 
 export function useDashboardViewModel() {
+  const router = useRouter();
   const [yearMonth, setYearMonth] = useState<YearMonth>(INITIAL_MONTH);
   const [isBalanceHidden, setIsBalanceHidden] = useState(false);
+  const [focusTick, setFocusTick] = useState(0);
 
-  const snapshot = useMemo(
-    () => getDashboardUseCase.executeSync(yearMonth),
-    [yearMonth]
+  const storeVersion = useSyncExternalStore(
+    (onStoreChange) => financeStore.subscribe(onStoreChange),
+    () => financeStore.getVersion(),
+    () => 0
   );
+
+  useFocusEffect(
+    useCallback(() => {
+      setFocusTick((tick) => tick + 1);
+    }, [])
+  );
+
+  const snapshot = useMemo(() => {
+    void storeVersion;
+    void focusTick;
+    return getDashboardUseCase.executeSync(yearMonth);
+  }, [focusTick, storeVersion, yearMonth]);
 
   const ui: DashboardUiState = useMemo(() => {
     const money = (cents: number, signed = false) =>
@@ -113,12 +130,12 @@ export function useDashboardViewModel() {
   }, []);
 
   const onAddExpense = useCallback(() => {
-    Alert.alert('Add expense', 'Expense form coming soon.');
-  }, []);
+    router.push({ pathname: '/add-transaction', params: { type: 'expense' } });
+  }, [router]);
 
   const onAddIncome = useCallback(() => {
-    Alert.alert('Add income', 'Income form coming soon.');
-  }, []);
+    router.push({ pathname: '/add-transaction', params: { type: 'income' } });
+  }, [router]);
 
   const onViewAllTransactions = useCallback(() => {
     Alert.alert('Transactions', 'Full transaction list coming soon.');
