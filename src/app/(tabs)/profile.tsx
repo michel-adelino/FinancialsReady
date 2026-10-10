@@ -1,8 +1,7 @@
 import { StyleSheet, Text, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
-import { AppColors } from '@/constants/theme';
-import { FontFamily } from '@/presentation/theme/typography';
+import { AppColors , FontFamily } from '@/core/theme';
 
 export default function ProfileScreen() {
   return (

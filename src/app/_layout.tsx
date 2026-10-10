@@ -11,8 +11,8 @@ import * as SplashScreen from 'expo-splash-screen';
 import { useCallback, useEffect, useState } from 'react';
 import { StyleSheet, View } from 'react-native';
 
-import { AppColors } from '@/constants/theme';
-import { SplashSequence } from '@/presentation/components/splash/splash-sequence';
+import { AppColors } from '@/core/theme';
+import { SplashSequence } from '@/presentation/features/splash/components/splash-sequence';
 
 SplashScreen.preventAutoHideAsync();
 

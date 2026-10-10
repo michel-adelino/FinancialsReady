@@ -1,4 +1,4 @@
-import { DashboardScreen } from '@/presentation/components/dashboard/dashboard-screen';
+import { DashboardScreen } from '@/presentation/features/dashboard/screens/dashboard-screen';
 
 export default function HomeScreen() {
   return <DashboardScreen />;
