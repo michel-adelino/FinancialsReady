@@ -1,7 +1,7 @@
 import { ChevronDown } from 'lucide-react-native';
 import { StyleSheet, Text, TextInput, View } from 'react-native';
 
-import { AppColors, Radius , FontFamily } from '@/core/theme';
+import { AppColors, FontFamily, Radius } from '@/core/theme';
 
 type AmountCardProps = {
   label: string;
@@ -37,7 +37,7 @@ export function AmountCard({
       <View style={styles.valueRow}>
         <Text style={styles.currencySymbol}>$</Text>
         <TextInput
-          value={displayAmount === '0' && !isFocused ? '' : displayAmount}
+          value={displayAmount === '0' ? '' : displayAmount}
           onChangeText={onChangeText}
           onFocus={onFocus}
           onBlur={onBlur}

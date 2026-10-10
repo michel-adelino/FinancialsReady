@@ -1,9 +1,9 @@
 import { useLocalSearchParams } from 'expo-router';
 import { useCallback, useMemo, useState } from 'react';
 
+import { formatMoneyFromCents } from '@/core/utils/format-money';
 import { transactionService } from '@/data/di';
 import type { TransactionType } from '@/domain/entities/transaction';
-import { formatMoneyFromCents } from '@/core/utils/format-money';
 
 export const NOTE_MAX = 80;
 export const REFERENCE_DATE = new Date(2026, 8, 30);
@@ -90,7 +90,9 @@ export function useAddTransactionViewModel() {
     const parts = cleaned.split('.');
     if (parts.length > 2) return;
     if (parts[1] && parts[1].length > 2) return;
-    setAmountText(cleaned);
+    const integer = (parts[0] ?? '').replace(/^0+(?=\d)/, '');
+    const normalized = parts.length > 1 ? `${integer || '0'}.${parts[1]}` : integer;
+    setAmountText(normalized);
   }, []);
 
   const onChangeNote = useCallback((text: string) => {
