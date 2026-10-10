@@ -1,4 +1,4 @@
-import { BriefcaseBusiness, Coffee, ShoppingBag } from 'lucide-react-native';
+import { BriefcaseBusiness, Coffee, ShoppingBag, Store } from 'lucide-react-native';
 import type { ComponentType } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 
@@ -13,6 +13,7 @@ const ICON_MAP: Record<TransactionIconKey, LucideIcon> = {
   'shopping-bag': ShoppingBag,
   'briefcase-business': BriefcaseBusiness,
   coffee: Coffee,
+  store: Store,
 };
 
 type TransactionRowProps = {
