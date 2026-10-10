@@ -2,7 +2,7 @@ import { ActivityIndicator, ScrollView, StyleSheet, Text, View } from 'react-nat
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 import { AppColors, BottomTabInset, FontFamily } from '@/core/theme';
-import { AppHeader } from '@/features/dashboard/presentation/components/app-header';
+import { AppHeader } from '@/features/shared/presentation/components/app-header';
 import { BalanceCard } from '@/features/dashboard/presentation/components/balance-card';
 import { SpendingOverviewCard } from '@/features/dashboard/presentation/components/spending-overview-card';
 import { TransactionList } from '@/features/dashboard/presentation/components/transaction-list';
