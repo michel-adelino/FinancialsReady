@@ -8,6 +8,7 @@ import {
 } from 'expo-router/ui';
 import {
   ChartNoAxesColumn,
+  ChartPie,
   House,
   UserRound,
   WalletCards,
@@ -28,6 +29,9 @@ export default function AppTabs() {
           <TabTrigger name="activity" href="/(tabs)/activity" asChild>
             <TabButton icon="activity">Activity</TabButton>
           </TabTrigger>
+          <TabTrigger name="insights" href="/(tabs)/insights" asChild>
+            <TabButton icon="insights">Insights</TabButton>
+          </TabTrigger>
           <TabTrigger name="plans" href="/(tabs)/plans" asChild>
             <TabButton icon="plans">Plans</TabButton>
           </TabTrigger>
@@ -40,7 +44,7 @@ export default function AppTabs() {
   );
 }
 
-type TabIconName = 'home' | 'activity' | 'plans' | 'profile';
+type TabIconName = 'home' | 'activity' | 'insights' | 'plans' | 'profile';
 
 type TabButtonProps = TabTriggerSlotProps & {
   icon: TabIconName;
@@ -53,6 +57,8 @@ function TabIcon({ name, color }: { name: TabIconName; color: string }) {
       return <House {...props} />;
     case 'activity':
       return <ChartNoAxesColumn {...props} />;
+    case 'insights':
+      return <ChartPie {...props} />;
     case 'plans':
       return <WalletCards {...props} />;
     case 'profile':
