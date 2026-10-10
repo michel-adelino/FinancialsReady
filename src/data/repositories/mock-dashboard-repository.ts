@@ -1,4 +1,4 @@
-import { MOCK_DASHBOARD } from '@/data/datasources/mock-dashboard-data';
+import { financeStore } from '@/data/datasources/finance-store';
 import type {
   DashboardSnapshot,
   YearMonth,
@@ -7,8 +7,9 @@ import type { SyncDashboardRepository } from '@/domain/repositories/dashboard-re
 
 export class MockDashboardRepository implements SyncDashboardRepository {
   getDashboardSync(yearMonth: YearMonth): DashboardSnapshot {
+    const snapshot = financeStore.getSnapshot();
     return {
-      ...MOCK_DASHBOARD,
+      ...snapshot,
       yearMonth,
     };
   }
