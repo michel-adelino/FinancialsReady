@@ -1,0 +1,11 @@
+<svg preserveAspectRatio="none" overflow="visible" style="display: block;" width="256" height="256" viewBox="0 0 256 256" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="Approved symbol">
+<path id="Coin outline" d="M188.493 122.496C188.493 158.945 158.945 188.493 122.496 188.493C86.047 188.493 56.4992 158.945 56.4992 122.496C56.4992 86.047 86.047 56.4992 122.496 56.4992C158.945 56.4992 188.493 86.047 188.493 122.496Z" stroke-width="11" stroke="#98D9BA"/>
+<g id="Dollar symbol">
+<path id="Dollar curve" d="M143.998 97.0007C137.498 91.0018 129.998 89.5021 122.498 89.5021C109.997 89.5021 100.997 96.0009 100.997 105.499C100.997 115.497 110.997 119.996 122.498 122.496C135.498 125.495 144.998 129.995 144.998 139.993C144.998 149.491 135.498 155.49 122.998 155.49C112.997 155.49 104.497 152.49 97.9968 145.992" stroke-width="11" stroke-linecap="round" stroke="#F3F7F1"/>
+<path id="Dollar stem" d="M122.499 80V164.992" stroke-width="11" stroke-linecap="round" stroke="#F3F7F1"/>
+</g>
+<path id="Check clearance" d="M175.002 208.998C193.778 208.998 208.998 193.778 208.998 175.002C208.998 156.226 193.778 141.005 175.002 141.005C156.226 141.005 141.005 156.226 141.005 175.002C141.005 193.778 156.226 208.998 175.002 208.998Z" fill="#19342D"/>
+<path id="Ready check" d="M156.493 174.503L169.997 188.006L196.506 160" stroke-width="12" stroke-linecap="round" stroke="#98D9BA"/>
+</g>
+</svg>
