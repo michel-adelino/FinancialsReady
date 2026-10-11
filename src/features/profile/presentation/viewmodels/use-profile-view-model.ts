@@ -2,7 +2,7 @@ import { useMemo, useSyncExternalStore } from 'react';
 
 import { formatMonthYear } from '@/core/utils/format-date';
 import { formatMoneyFromCents } from '@/core/utils/format-money';
-import { profileService } from '@/features/shared/di';
+import { accountsService, profileService } from '@/features/shared/di';
 
 export type ProfileUiState = {
   brandDateLabel: string;
@@ -24,16 +24,24 @@ export type ProfileUiState = {
 
 /** Maps profile domain data into screen-ready UI state. */
 export function useProfileViewModel(): ProfileUiState {
-  const storeVersion = useSyncExternalStore(
+  const profileVersion = useSyncExternalStore(
     (onStoreChange) => profileService.subscribe(onStoreChange),
     () => profileService.getVersion(),
     () => 0
   );
 
+  const accountsVersion = useSyncExternalStore(
+    (onStoreChange) => accountsService.subscribe(onStoreChange),
+    () => accountsService.getVersion(),
+    () => 0
+  );
+
   return useMemo(() => {
-    void storeVersion;
+    void profileVersion;
+    void accountsVersion;
     const snapshot = profileService.getProfileSync();
     const { user } = snapshot;
+    const accountsConnected = accountsService.getAccountCount();
 
     return {
       brandDateLabel: formatMonthYear(
@@ -49,11 +57,11 @@ export function useProfileViewModel(): ProfileUiState {
       currencyName: snapshot.currencyName,
       budgetAmountLabel: formatMoneyFromCents(snapshot.monthlyBudgetCents),
       budgetUsedLabel: `${snapshot.budgetUsedPercent}% used`,
-      accountsSubtitle: `${snapshot.accountsConnected} connected`,
+      accountsSubtitle: `${accountsConnected} connected`,
       categoriesSubtitle: `${snapshot.categoriesActive} active`,
       planBillingSubtitle: `Ready Plus · renews ${user.renewsLong}`,
       notificationsEnabled: snapshot.notificationsEnabled,
       versionLabel: snapshot.versionLabel,
     };
-  }, [storeVersion]);
+  }, [accountsVersion, profileVersion]);
 }
