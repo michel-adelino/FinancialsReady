@@ -31,8 +31,8 @@ export function useProfileController() {
   }, [router]);
 
   const onCategoriesPress = useCallback(() => {
-    Alert.alert('Categories', 'Category manager coming soon.');
-  }, []);
+    router.push('/categories' as Href);
+  }, [router]);
 
   const onPlanBillingPress = useCallback(() => {
     Alert.alert('Plan & billing', 'Billing details coming soon.');
