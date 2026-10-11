@@ -84,6 +84,13 @@ export default function RootLayout() {
             }}
           />
           <Stack.Screen
+            name="create-budget"
+            options={{
+              presentation: 'modal',
+              animation: 'slide_from_bottom',
+            }}
+          />
+          <Stack.Screen
             name="categories"
             options={{
               animation: 'slide_from_right',
