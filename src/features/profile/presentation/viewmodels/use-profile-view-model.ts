@@ -2,7 +2,11 @@ import { useMemo, useSyncExternalStore } from 'react';
 
 import { formatMonthYear } from '@/core/utils/format-date';
 import { formatMoneyFromCents } from '@/core/utils/format-money';
-import { accountsService, profileService } from '@/features/shared/di';
+import {
+  accountsService,
+  categoriesService,
+  profileService,
+} from '@/features/shared/di';
 
 export type ProfileUiState = {
   brandDateLabel: string;
@@ -36,12 +40,20 @@ export function useProfileViewModel(): ProfileUiState {
     () => 0
   );
 
+  const categoriesVersion = useSyncExternalStore(
+    (onStoreChange) => categoriesService.subscribe(onStoreChange),
+    () => categoriesService.getVersion(),
+    () => 0
+  );
+
   return useMemo(() => {
     void profileVersion;
     void accountsVersion;
+    void categoriesVersion;
     const snapshot = profileService.getProfileSync();
     const { user } = snapshot;
     const accountsConnected = accountsService.getAccountCount();
+    const categoriesActive = categoriesService.getCategoryCount();
 
     return {
       brandDateLabel: formatMonthYear(
@@ -58,10 +70,10 @@ export function useProfileViewModel(): ProfileUiState {
       budgetAmountLabel: formatMoneyFromCents(snapshot.monthlyBudgetCents),
       budgetUsedLabel: `${snapshot.budgetUsedPercent}% used`,
       accountsSubtitle: `${accountsConnected} connected`,
-      categoriesSubtitle: `${snapshot.categoriesActive} active`,
+      categoriesSubtitle: `${categoriesActive} active`,
       planBillingSubtitle: `Ready Plus · renews ${user.renewsLong}`,
       notificationsEnabled: snapshot.notificationsEnabled,
       versionLabel: snapshot.versionLabel,
     };
-  }, [accountsVersion, profileVersion]);
+  }, [accountsVersion, categoriesVersion, profileVersion]);
 }
