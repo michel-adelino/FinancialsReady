@@ -1,7 +1,6 @@
 import { MOCK_PROFILE } from '@/features/profile/data/datasources/mock-profile-data';
 import type { ProfileSnapshot } from '@/features/profile/domain/entities/profile-snapshot';
 
-/** Mutable in-memory profile state seeded from the design mock. */
 export class ProfileService {
   private snapshot: ProfileSnapshot = { ...MOCK_PROFILE, user: { ...MOCK_PROFILE.user } };
   private version = 0;
