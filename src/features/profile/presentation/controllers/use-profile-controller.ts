@@ -1,3 +1,4 @@
+import { type Href, useRouter } from 'expo-router';
 import { useCallback } from 'react';
 import { Alert } from 'react-native';
 
@@ -6,6 +7,7 @@ import { profileService } from '@/features/shared/di';
 
 /** Handles Profile & settings intents on top of ViewModel state. */
 export function useProfileController() {
+  const router = useRouter();
   const viewModel = useProfileViewModel();
 
   const onNotifications = useCallback(() => {
@@ -25,8 +27,8 @@ export function useProfileController() {
   }, []);
 
   const onAccountsPress = useCallback(() => {
-    Alert.alert('Accounts', 'Connected accounts coming soon.');
-  }, []);
+    router.push('/accounts' as Href);
+  }, [router]);
 
   const onCategoriesPress = useCallback(() => {
     Alert.alert('Categories', 'Category manager coming soon.');
