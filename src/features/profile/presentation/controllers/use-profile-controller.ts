@@ -23,8 +23,8 @@ export function useProfileController() {
   }, []);
 
   const onBudgetPress = useCallback(() => {
-    Alert.alert('Monthly budget', 'Budget editor coming soon.');
-  }, []);
+    router.push('/create-budget' as Href);
+  }, [router]);
 
   const onAccountsPress = useCallback(() => {
     router.push('/accounts' as Href);
