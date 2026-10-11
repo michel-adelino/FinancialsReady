@@ -4,6 +4,7 @@ import { GetDashboardUseCase } from '@/features/dashboard/domain/usecases/get-da
 import { GetGreetingUseCase } from '@/features/dashboard/domain/usecases/get-greeting-use-case';
 import { AddTransactionUseCase } from '@/features/add-transaction/domain/usecases/add-transaction-use-case';
 import { InsightsService } from '@/features/insights/data/services/insights-service';
+import { ProfileService } from '@/features/profile/data/services/profile-service';
 import { MockTransactionRepository } from '@/features/shared/data/repositories/mock-transaction-repository';
 import { TransactionService } from '@/features/shared/data/services/transaction-service';
 
@@ -23,3 +24,4 @@ export const transactionService = new TransactionService(
   transactionRepository
 );
 export const insightsService = new InsightsService();
+export const profileService = new ProfileService();
