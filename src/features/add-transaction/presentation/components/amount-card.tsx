@@ -10,6 +10,8 @@ type AmountCardProps = {
   onChangeText: (text: string) => void;
   onFocus: () => void;
   onBlur: () => void;
+  /** Shown when not focused (e.g. "Ready"); Editing still wins when focused. */
+  statusBadge?: string | null;
 };
 
 export function AmountCard({
@@ -19,17 +21,20 @@ export function AmountCard({
   onChangeText,
   onFocus,
   onBlur,
+  statusBadge,
 }: AmountCardProps) {
+  const badgeLabel = isFocused ? 'Editing' : statusBadge;
+
   return (
     <View style={styles.card}>
       <View style={styles.ambient} />
 
       <View style={styles.heading}>
         <Text style={styles.label}>{label}</Text>
-        {isFocused ? (
+        {badgeLabel ? (
           <View style={styles.editingPill}>
             <View style={styles.editingDot} />
-            <Text style={styles.editingText}>Editing</Text>
+            <Text style={styles.editingText}>{badgeLabel}</Text>
           </View>
         ) : null}
       </View>
