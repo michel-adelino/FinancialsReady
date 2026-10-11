@@ -1,6 +1,6 @@
 import { NativeTabs } from 'expo-router/unstable-native-tabs';
 
-import { AppColors } from '@/constants/theme';
+import { AppColors } from '@/core/theme';
 
 export default function AppTabs() {
   return (

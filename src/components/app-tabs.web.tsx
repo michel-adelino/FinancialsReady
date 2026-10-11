@@ -14,8 +14,7 @@ import {
 } from 'lucide-react-native';
 import { Pressable, StyleSheet, Text, View } from 'react-native';
 
-import { AppColors, MaxContentWidth, Spacing } from '@/constants/theme';
-import { FontFamily } from '@/presentation/theme/typography';
+import { AppColors, FontFamily, MaxContentWidth, Spacing } from '@/core/theme';
 
 export default function AppTabs() {
   return (
