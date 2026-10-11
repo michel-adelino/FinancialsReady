@@ -1,4 +1,4 @@
-import { useRouter } from 'expo-router';
+import { type Href, useRouter } from 'expo-router';
 import { useCallback } from 'react';
 import { Alert } from 'react-native';
 
@@ -26,8 +26,8 @@ export function useDashboardController() {
   }, [router]);
 
   const onViewAllTransactions = useCallback(() => {
-    Alert.alert('Transactions', 'Full transaction list coming soon.');
-  }, []);
+    router.push('/(tabs)/activity' as Href);
+  }, [router]);
 
   const onTransactionPress = useCallback(
     (id: string) => {
