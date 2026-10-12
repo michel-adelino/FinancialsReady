@@ -2,8 +2,14 @@ import { MockDashboardRepository } from '@/features/dashboard/data/repositories/
 import { DashboardService } from '@/features/dashboard/data/services/dashboard-service';
 import { GetDashboardUseCase } from '@/features/dashboard/domain/usecases/get-dashboard-use-case';
 import { GetGreetingUseCase } from '@/features/dashboard/domain/usecases/get-greeting-use-case';
+import { ActivityRepositoryImpl } from '@/features/activity/data/repositories/activity-repository-impl';
+import { ActivityService } from '@/features/activity/data/services/activity-service';
 import { AddTransactionUseCase } from '@/features/add-transaction/domain/usecases/add-transaction-use-case';
+import { BudgetRepositoryImpl } from '@/features/budget/data/repositories/budget-repository-impl';
+import { BudgetService } from '@/features/budget/data/services/budget-service';
 import { InsightsService } from '@/features/insights/data/services/insights-service';
+import { OnboardingRepositoryImpl } from '@/features/onboarding/data/repositories/onboarding-repository-impl';
+import { OnboardingService } from '@/features/onboarding/data/services/onboarding-service';
 import { ProfileRepositoryImpl } from '@/features/profile/data/repositories/profile-repository-impl';
 import { AccountsService } from '@/features/profile/data/services/accounts-service';
 import { CategoriesService } from '@/features/profile/data/services/categories-service';
@@ -14,7 +20,9 @@ import { TransactionService } from '@/features/shared/data/services/transaction-
 const dashboardRepository = new MockDashboardRepository();
 const transactionRepository = new MockTransactionRepository();
 const profileRepository = new ProfileRepositoryImpl();
-
+const budgetRepository = new BudgetRepositoryImpl();
+const activityRepository = new ActivityRepositoryImpl();
+const onboardingRepository = new OnboardingRepositoryImpl();
 const getDashboardUseCase = new GetDashboardUseCase(dashboardRepository);
 const getGreetingUseCase = new GetGreetingUseCase();
 const addTransactionUseCase = new AddTransactionUseCase(transactionRepository);
@@ -28,6 +36,9 @@ export const transactionService = new TransactionService(
   transactionRepository
 );
 export const insightsService = new InsightsService();
+export const activityService = new ActivityService(activityRepository);
 export const profileService = new ProfileService(profileRepository);
 export const accountsService = new AccountsService();
 export const categoriesService = new CategoriesService();
+export const budgetService = new BudgetService(budgetRepository);
+export const onboardingService = new OnboardingService(onboardingRepository);
