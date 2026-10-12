@@ -39,6 +39,7 @@ export class BudgetRepositoryImpl implements BudgetRepository {
     const budget: Budget = {
       id: `budget-${Date.now()}`,
       amountCents: Math.abs(input.amountCents),
+      spentCents: 0,
       categoryId: input.categoryId,
       categoryName: input.categoryName.trim(),
       period: input.period,
@@ -46,6 +47,7 @@ export class BudgetRepositoryImpl implements BudgetRepository {
       alertEnabled: input.alertEnabled,
       alertThresholdPercent: input.alertThresholdPercent,
       currencyCode: input.currencyCode || 'USD',
+      iconKey: input.iconKey ?? 'shopping-bag',
     };
 
     this.budgets = [budget, ...this.budgets];
