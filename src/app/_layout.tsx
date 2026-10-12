@@ -12,6 +12,8 @@ import { useCallback, useEffect, useState } from 'react';
 import { StyleSheet, View } from 'react-native';
 
 import { AppColors } from '@/core/theme';
+import { OnboardingSequence } from '@/features/onboarding/presentation/screens/onboarding-sequence';
+import { onboardingService } from '@/features/shared/di';
 import { SplashSequence } from '@/features/splash/presentation/components/splash-sequence';
 
 SplashScreen.preventAutoHideAsync();
@@ -37,6 +39,9 @@ export default function RootLayout() {
     Inter_700Bold,
   });
   const [showSplash, setShowSplash] = useState(true);
+  const [showOnboarding, setShowOnboarding] = useState(
+    () => !onboardingService.isCompletedSync()
+  );
 
   useEffect(() => {
     if (!(fontsLoaded || fontError)) return;
@@ -47,13 +52,23 @@ export default function RootLayout() {
     setShowSplash(false);
   }, []);
 
+  const handleOnboardingComplete = useCallback(() => {
+    setShowOnboarding(false);
+  }, []);
+
   if (!fontsLoaded && !fontError) {
     return null;
   }
 
+  const statusBarStyle = showSplash
+    ? 'light'
+    : showOnboarding
+      ? undefined
+      : 'dark';
+
   return (
     <ThemeProvider value={AppTheme}>
-      <StatusBar style={showSplash ? 'light' : 'dark'} />
+      {statusBarStyle ? <StatusBar style={statusBarStyle} /> : null}
       <View style={styles.root}>
         <Stack screenOptions={{ headerShown: false }}>
           <Stack.Screen name="(tabs)" />
@@ -97,6 +112,9 @@ export default function RootLayout() {
             }}
           />
         </Stack>
+        {!showSplash && showOnboarding ? (
+          <OnboardingSequence onComplete={handleOnboardingComplete} />
+        ) : null}
         {showSplash ? <SplashSequence onFinish={handleSplashFinish} /> : null}
       </View>
     </ThemeProvider>
