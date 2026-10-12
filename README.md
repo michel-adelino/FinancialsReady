@@ -1,56 +1,180 @@
-# Welcome to your Expo app 👋
+# Financials Ready
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+Personal finance app built with **Expo** and **React Native**. Track balances, record income and expenses, review activity, explore insights, set category budgets, and manage accounts. All from a clean, mobile-first UI.
 
-## Get started
+![Financials Ready cover](screenshots/financials_ready%20_project_cover.png)
 
-1. Install dependencies
+## Demo & design
 
-   ```bash
-   npm install
-   ```
+- **Figma** (screens designed here): [Mobile Financials Ready App](https://www.figma.com/design/oEcDf7bYD1nHFQaqTg5sMX/-shareable-Mobile_financials_Ready_App?node-id=26-4)
+- **Walkthrough video**: [financy_ready.mp4 (Google Drive)](https://drive.google.com/file/d/1DfnpT2tBiQlb23bnEpos0rfYnOWyLw_q/view?usp=sharing)
 
-2. Start the app
 
-   ```bash
-   npx expo start
-   ```
 
-In the output, you'll find options to open the app in a
+## Screenshots
 
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
 
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
+| Splash                                   | Onboarding                                    |
+| ---------------------------------------- | --------------------------------------------- |
+| ![Splash](screenshots/splash_screen.png) | ![Onboarding 1](screenshots/onboarding_1.png) |
 
-## Get a fresh project
 
-When you're ready, run:
 
-```bash
-npm run reset-project
+| Onboarding                                    | Onboarding                                    |
+| --------------------------------------------- | --------------------------------------------- |
+| ![Onboarding 2](screenshots/onboarding_2.png) | ![Onboarding 3](screenshots/onboarding_3.png) |
+
+
+
+| Home                                                     | Accounts                                     |
+| -------------------------------------------------------- | -------------------------------------------- |
+| ![Home dashboard](screenshots/home_dashboard_screen.png) | ![Accounts](screenshots/accounts_screen.png) |
+
+
+
+| Categories                                       |
+| ------------------------------------------------ |
+| ![Categories](screenshots/categories_screen.png) |
+
+
+More captures live under `[screenshots/](screenshots/)`.
+
+## Features
+
+- **Splash** - branded launch sequence
+- **Onboarding** - three-step product intro (record, insights, budgets)
+- **Home / Dashboard** - balance, spending overview, recent transactions
+- **Activity** - filtered feed of transactions, account updates, and budget alerts
+- **Insights** - cash flow, spending trends, and category breakdown
+- **Plans / Budgets** - monthly budget overview, category progress, create budget modal
+- **Profile** - preferences, accounts, and categories
+- **Add transaction** & **Transaction details** - capture and review individual records
+
+Data today is **in-memory mock** (no backend required to run the app).
+
+## Stack
+
+- [Expo](https://expo.dev) ~57 + [React Native](https://reactnative.dev)
+- [Expo Router](https://docs.expo.dev/router/introduction/) (file-based navigation)
+- TypeScript
+- [Lucide React Native](https://lucide.dev) (icons)
+- React Native Reanimated
+- In-memory repositories / services (mock datasources)
+
+
+
+## Architecture
+
+The app follows **MVVM + Clean Architecture**, organized by **feature** under `src/features/<name>/`.
+
+```
+src/
+  app/                 # Thin Expo Router routes (screens are imported from features)
+  core/                # Shared theme, tokens, and utilities
+  features/
+    <feature>/
+      domain/          # Entities (and use cases where needed)
+      data/            # Datasources, repositories, services
+      presentation/    # Screens, components, viewmodels, controllers
+    shared/
+      di.ts            # Composition root / dependency injection
 ```
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
 
-### Other setup steps
 
-- To set up ESLint for linting, run `npx expo lint`, or follow our guide on ["Using ESLint and Prettier"](https://docs.expo.dev/guides/using-eslint/)
-- If you'd like to set up unit testing, follow our guide on ["Unit Testing with Jest"](https://docs.expo.dev/develop/unit-testing/)
-- Learn more about the TypeScript setup in this template in our guide on ["Using TypeScript"](https://docs.expo.dev/guides/typescript/)
+### Layers
 
-## Learn more
 
-To learn more about developing your project with Expo, look at the following resources:
+| Layer            | Responsibility                                                                                   |
+| ---------------- | ------------------------------------------------------------------------------------------------ |
+| **Presentation** | UI (`screens`, `components`), `viewmodels` (UI state), `controllers` (user intents / navigation) |
+| **Domain**       | Entities and use cases, independent of frameworks                                                |
+| **Data**         | Mock datasources, repository contracts + implementations, application services                   |
 
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
 
-## Join the community
 
-Join our community of developers creating universal apps.
 
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+### Request flow
+
+```mermaid
+flowchart LR
+  Screen --> Controller
+  Controller --> ViewModel
+  ViewModel --> Service
+  Service --> Repository
+  Repository --> Datasource
+```
+
+
+
+Services are wired once in `[src/features/shared/di.ts](src/features/shared/di.ts)` and imported by viewmodels/controllers. Swapping a mock repository for a real API client should not require rewriting screens.
+
+### Feature modules (examples)
+
+`dashboard`, `activity`, `insights`, `budget`, `profile`, `onboarding`, `add-transaction`, `transaction-details`, `splash`, plus shared transaction/store helpers.
+
+## Getting started
+
+
+
+### Prerequisites
+
+- Node.js (LTS recommended)
+- npm
+- Expo Go, an emulator/simulator, or a [development build](https://docs.expo.dev/develop/development-builds/introduction/)
+
+
+
+### Install & run
+
+```bash
+npm install
+npx expo start
+```
+
+Then open the project in Expo Go, an Android emulator, an iOS simulator, or the web target from the CLI menu.
+
+### Scripts
+
+
+| Script                         | Description               |
+| ------------------------------ | ------------------------- |
+| `npm start` / `npx expo start` | Start the Expo dev server |
+| `npm run android`              | Start targeting Android   |
+| `npm run ios`                  | Start targeting iOS       |
+| `npm run web`                  | Start targeting web       |
+| `npm run lint`                 | Run Expo ESLint           |
+
+
+Typecheck locally with:
+
+```bash
+npx tsc --noEmit
+```
+
+
+
+## Project structure (quick map)
+
+```
+FinancialsReady/
+  src/app/             # Routes: tabs, modals (create-budget, add-transaction, …)
+  src/core/            # Theme (colors, typography), formatters
+  src/features/        # Feature slices (MVVM + Clean Architecture)
+  screenshots/         # UI captures for docs
+  assets/              # Images, fonts, tab icons
+```
+
+
+
+## Roadmap
+
+- Integrate a backend API built with **NestJS** and **Firebase** (auth, persistence, sync).
+- Replace in-memory repositories with HTTP/Firebase-backed implementations while keeping the same service/repository boundaries in `di.ts`.
+- Persist onboarding completion and user session across launches.
+
+
+
+## License
+
+Private project (`"private": true` in `package.json`).
