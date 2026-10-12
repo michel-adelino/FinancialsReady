@@ -6,8 +6,8 @@ Personal finance app built with **Expo** and **React Native**. Track balances, r
 
 ## Demo & design
 
-- **Figma** (screens designed here): [Mobile Financials Ready App](https://www.figma.com/design/oEcDf7bYD1nHFQaqTg5sMX/-shareable-Mobile_financials_Ready_App?node-id=26-4)
-- **Walkthrough video**: [financy_ready.mp4 (Google Drive)](https://drive.google.com/file/d/1DfnpT2tBiQlb23bnEpos0rfYnOWyLw_q/view?usp=sharing)
+- <img src="https://upload.wikimedia.org/wikipedia/commons/3/33/Figma-logo.svg" alt="Figma" width="16" height="16" /> **Figma** (screens designed here): <a href="https://www.figma.com/design/oEcDf7bYD1nHFQaqTg5sMX/-shareable-Mobile_financials_Ready_App?node-id=26-4" target="_blank" rel="noopener noreferrer">Mobile Financials Ready App</a>
+- **Walkthrough video**: <a href="https://drive.google.com/file/d/1DfnpT2tBiQlb23bnEpos0rfYnOWyLw_q/view?usp=sharing" target="_blank" rel="noopener noreferrer">financy_ready.mp4 (Google Drive)</a>
 
 
 
@@ -54,10 +54,10 @@ Data today is **in-memory mock** (no backend required to run the app).
 
 ## Stack
 
-- [Expo](https://expo.dev) ~57 + [React Native](https://reactnative.dev)
-- [Expo Router](https://docs.expo.dev/router/introduction/) (file-based navigation)
+- <a href="https://expo.dev" target="_blank" rel="noopener noreferrer">Expo</a> ~57 + <a href="https://reactnative.dev" target="_blank" rel="noopener noreferrer">React Native</a>
+- <a href="https://docs.expo.dev/router/introduction/" target="_blank" rel="noopener noreferrer">Expo Router</a> (file-based navigation)
 - TypeScript
-- [Lucide React Native](https://lucide.dev) (icons)
+- <a href="https://lucide.dev" target="_blank" rel="noopener noreferrer">Lucide React Native</a> (icons)
 - React Native Reanimated
 - In-memory repositories / services (mock datasources)
 
@@ -121,7 +121,7 @@ Services are wired once in `[src/features/shared/di.ts](src/features/shared/di.t
 
 - Node.js (LTS recommended)
 - npm
-- Expo Go, an emulator/simulator, or a [development build](https://docs.expo.dev/develop/development-builds/introduction/)
+- Expo Go, an emulator/simulator, or a <a href="https://docs.expo.dev/develop/development-builds/introduction/" target="_blank" rel="noopener noreferrer">development build</a>
 
 
 
