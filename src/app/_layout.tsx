@@ -80,6 +80,12 @@ export default function RootLayout() {
             }}
           />
           <Stack.Screen
+            name="transaction-success"
+            options={{
+              animation: 'fade',
+            }}
+          />
+          <Stack.Screen
             name="transaction-details"
             options={{
               animation: 'slide_from_right',
