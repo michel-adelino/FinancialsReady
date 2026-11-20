@@ -85,17 +85,29 @@ export function useAddTransactionController() {
     if (isSaving) return;
     setIsSaving(true);
     try {
+      const merchant = payee || (type === 'expense' ? 'Untitled expense' : 'Untitled income');
+      const resolvedCategory = category || 'Other';
       await transactionService.addTransaction({
         type,
         amountCents,
-        merchant: payee || (type === 'expense' ? 'Untitled expense' : 'Untitled income'),
-        category: category || 'Other',
+        merchant,
+        category: resolvedCategory,
         accountLabel,
         occurredAt,
         note,
         cleared,
       });
-      router.back();
+      router.replace({
+        pathname: '/transaction-success',
+        params: {
+          type,
+          amountCents: String(amountCents),
+          merchant,
+          category: resolvedCategory,
+          accountLabel,
+          occurredAt: occurredAt.toISOString(),
+        },
+      });
     } catch (error) {
       const message = error instanceof Error ? error.message : 'Unable to save transaction.';
       Alert.alert('Save failed', message);
